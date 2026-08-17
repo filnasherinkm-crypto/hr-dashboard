@@ -81,7 +81,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ mobileOpen, setMobileOpen }) =
               </div>
             </div>
             <div className="flex flex-col">
-              <span className="font-bold text-lg text-white tracking-tight">Filna</span>
+              <span className="font-bold text-lg text-white tracking-tight">Dashboard</span>
             </div>
           </Link>
 
