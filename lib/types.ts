@@ -1,3 +1,5 @@
+import { Image } from "sanity";
+
 export type EmploymentType = 'Full-time' | 'Part-time' | 'Intern' | 'Contract';
 export type EmployeeStatus = 'Active' | 'On Leave' | 'Inactive';
 export type UserRole = 'admin' | 'employee';
@@ -92,7 +94,7 @@ export interface CurrentUser {
   name: string;
   email: string;
   role: UserRole;
-  avatarUrl?: string;
+  avatar?: string;
   employeeId?: string;
   department?: string;
   title?: string;

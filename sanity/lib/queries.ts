@@ -108,3 +108,20 @@ export const PAYROLL_RECORDS_QUERY = groq`
     paymentDate
   }
 `;
+
+// Current Users Query
+export const CURRENT_USERS_QUERY = groq`
+  *[_type == "currentUser"] {
+    _id,
+    "id": _id,
+    name,
+    email,
+    role,
+    "avatar": avatar.asset->url,
+    employeeId,
+    department,
+    title,
+    phone,
+    location
+  }
+`;

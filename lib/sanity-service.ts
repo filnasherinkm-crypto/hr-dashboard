@@ -5,8 +5,9 @@ import {
   SPECIAL_EVENTS_QUERY,
   WFH_REQUESTS_QUERY,
   PAYROLL_RECORDS_QUERY,
+  CURRENT_USERS_QUERY,
 } from '@/sanity/lib/queries';
-import { Employee, SpecialEvent, WFHRequest, PayrollRecord } from './types';
+import { Employee, SpecialEvent, WFHRequest, PayrollRecord, CurrentUser } from './types';
 
 export const sanityService = {
   isConfigured: () => isSanityConfigured,
@@ -67,6 +68,21 @@ export const sanityService = {
       return null;
     } catch (err) {
       console.warn('Error fetching payroll from Sanity:', err);
+      return null;
+    }
+  },
+
+  // Fetch Current Users from Sanity
+  getCurrentUsers: async (): Promise<CurrentUser[] | null> => {
+    if (!isSanityConfigured) return null;
+    try {
+      const data = await client.fetch(CURRENT_USERS_QUERY);
+      if (Array.isArray(data) && data.length > 0) {
+        return data as CurrentUser[];
+      }
+      return null;
+    } catch (err) {
+      console.warn('Error fetching current users from Sanity:', err);
       return null;
     }
   },

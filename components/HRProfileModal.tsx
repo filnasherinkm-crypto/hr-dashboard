@@ -59,7 +59,7 @@ export const HRProfileModal: React.FC<HRProfileModalProps> = ({ isOpen, onClose 
   const [email, setEmail] = useState(currentUser.email);
   const [title, setTitle] = useState(currentUser.title || 'Human Resources Director');
   const [department, setDepartment] = useState(currentUser.department || 'People & Operations');
-  const [avatarUrl, setAvatarUrl] = useState(currentUser.avatarUrl || PRESET_AVATARS[0].url);
+  const [avatar, setAvatar] = useState(currentUser.avatar || PRESET_AVATARS[0].url);
   const [phone, setPhone] = useState(currentUser.phone || '+1 (555) 880-9900');
   const [mounted, setMounted] = useState(false);
   const [customUrlInput, setCustomUrlInput] = useState('');
@@ -74,7 +74,7 @@ export const HRProfileModal: React.FC<HRProfileModalProps> = ({ isOpen, onClose 
       setEmail(currentUser.email);
       setTitle(currentUser.title || 'Human Resources Director');
       setDepartment(currentUser.department || 'People & Operations');
-      setAvatarUrl(currentUser.avatarUrl || PRESET_AVATARS[0].url);
+      setAvatar(currentUser.avatar || PRESET_AVATARS[0].url);
       setPhone(currentUser.phone || '+1 (555) 880-9900');
     }
   }, [isOpen, currentUser]);
@@ -85,7 +85,7 @@ export const HRProfileModal: React.FC<HRProfileModalProps> = ({ isOpen, onClose 
     currentUser.email = email;
     currentUser.title = title;
     currentUser.department = department;
-    currentUser.avatarUrl = avatarUrl;
+    currentUser.avatar = avatar;
     currentUser.phone = phone;
 
     showToast('Profile Updated', 'HR Admin display picture and details saved.', 'success');
@@ -127,7 +127,7 @@ export const HRProfileModal: React.FC<HRProfileModalProps> = ({ isOpen, onClose 
             {/* DP Image */}
             <div className="relative group shrink-0">
               <img
-                src={avatarUrl}
+                src={avatar}
                 alt={name}
                 className="w-20 h-20 rounded-2xl object-cover border-2 border-[#FF7900] shadow-md"
                 onError={(e) => {
@@ -148,9 +148,9 @@ export const HRProfileModal: React.FC<HRProfileModalProps> = ({ isOpen, onClose 
                   <button
                     key={av.id}
                     type="button"
-                    onClick={() => setAvatarUrl(av.url)}
+                    onClick={() => setAvatar(av.url)}
                     className={`w-7 h-7 rounded-lg overflow-hidden border-2 transition-all cursor-pointer ${
-                      avatarUrl === av.url ? 'border-[#FF7900] scale-110 shadow-xs' : 'border-zinc-200 opacity-60 hover:opacity-100'
+                      avatar === av.url ? 'border-[#FF7900] scale-110 shadow-xs' : 'border-zinc-200 opacity-60 hover:opacity-100'
                     }`}
                     title={av.label}
                   >
@@ -178,7 +178,7 @@ export const HRProfileModal: React.FC<HRProfileModalProps> = ({ isOpen, onClose 
                 type="button"
                 onClick={() => {
                   if (customUrlInput.trim()) {
-                    setAvatarUrl(customUrlInput.trim());
+                    setAvatar(customUrlInput.trim());
                     setCustomUrlInput('');
                   }
                 }}

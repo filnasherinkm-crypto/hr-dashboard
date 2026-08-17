@@ -505,7 +505,7 @@ export const CURRENT_USER_ADMIN: CurrentUser = {
   department: 'People & Operations',
   phone: '+1 (555) 880-9900',
   location: 'San Francisco, CA',
-  avatarUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=256&auto=format&fit=crop',
+  avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=256&auto=format&fit=crop',
 };
 export const CURRENT_USER_EMPLOYEE: CurrentUser = {
   id: 'emp-1',
@@ -517,6 +517,6 @@ export const CURRENT_USER_EMPLOYEE: CurrentUser = {
   title: 'Senior Software Engineer',
   phone: '+1 (555) 234-5678',
   location: 'San Francisco, CA',
-  avatarUrl: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=256&auto=format&fit=crop',
+  avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=256&auto=format&fit=crop',
 };
 

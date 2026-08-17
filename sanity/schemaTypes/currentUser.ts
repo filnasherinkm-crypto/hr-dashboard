@@ -31,9 +31,12 @@ export const currentUserSchema = defineType({
       initialValue: 'employee',
     }),
     defineField({
-      name: 'avatarUrl',
-      title: 'Avatar URL',
-      type: 'url',
+      name: 'avatar',
+      title: 'Avatar Image',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
     }),
     defineField({
       name: 'employeeId',
@@ -66,11 +69,13 @@ export const currentUserSchema = defineType({
     select: {
       title: 'name',
       subtitle: 'role',
+      media: 'avatar',
     },
-    prepare({ title, subtitle }) {
+    prepare({ title, subtitle, media }) {
       return {
         title,
         subtitle: subtitle === 'admin' ? 'Administrator' : 'Employee',
+        media,
       };
     },
   },

@@ -107,6 +107,7 @@ export const HRStoreProvider = ({ children }: { children: ReactNode }) => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isSanityConnected, setIsSanityConnected] = useState(false);
+  const [sanityUsers, setSanityUsers] = useState<CurrentUser[]>([]);
 
   // Initialize from LocalStorage & Sanity on mount
   useEffect(() => {
@@ -144,11 +145,19 @@ export const HRStoreProvider = ({ children }: { children: ReactNode }) => {
         sanityService.getEvents(),
         sanityService.getWFHRequests(),
         sanityService.getPayrollRecords(),
-      ]).then(([sEmployees, sEvents, sWFH, sPayroll]) => {
+        sanityService.getCurrentUsers(),
+      ]).then(([sEmployees, sEvents, sWFH, sPayroll, sUsers]) => {
         setEmployees(sEmployees || []);
         setEvents(sEvents || []);
         setWfhRequests(sWFH || []);
         setPayrollRecords(sPayroll || []);
+        
+        if (sUsers && sUsers.length > 0) {
+          setSanityUsers(sUsers);
+          const storedRole = localStorage.getItem(STORAGE_KEYS.USER_ROLE) || 'admin';
+          const sanityUser = sUsers.find(u => u.role === storedRole) || sUsers[0];
+          setCurrentUser(sanityUser);
+        }
       });
     }
   }, []);
@@ -200,17 +209,17 @@ export const HRStoreProvider = ({ children }: { children: ReactNode }) => {
   }, [calendarEntries, isLoaded]);
 
   const switchRole = (role: UserRole) => {
-    if (role === 'admin') {
-      setCurrentUser(CURRENT_USER_ADMIN);
-      try {
-        localStorage.setItem(STORAGE_KEYS.USER_ROLE, 'admin');
-      } catch {}
+    let nextUser: CurrentUser;
+    if (sanityUsers.length > 0) {
+      nextUser = sanityUsers.find(u => u.role === role) || sanityUsers[0];
     } else {
-      setCurrentUser(CURRENT_USER_EMPLOYEE);
-      try {
-        localStorage.setItem(STORAGE_KEYS.USER_ROLE, 'employee');
-      } catch {}
+      nextUser = role === 'admin' ? CURRENT_USER_ADMIN : CURRENT_USER_EMPLOYEE;
     }
+    
+    setCurrentUser(nextUser);
+    try {
+      localStorage.setItem(STORAGE_KEYS.USER_ROLE, role);
+    } catch {}
   };
 
   const resetToDefault = () => {

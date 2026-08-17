@@ -129,9 +129,9 @@ export const TopHeader: React.FC<TopHeaderProps> = ({ onToggleMobileMenu }) => {
               className="relative w-10 h-10 rounded-xl overflow-hidden border-2 border-[#FF7900] shadow-md shadow-orange-500/20 hover:scale-105 transition-all focus:outline-hidden cursor-pointer group bg-zinc-900 flex items-center justify-center text-white"
               title="HR Profile & Display Picture"
             >
-              {currentUser.avatarUrl ? (
+              {currentUser.avatar ? (
                 <img
-                  src={currentUser.avatarUrl}
+                  src={currentUser.avatar}
                   alt={currentUser.name}
                   className="w-full h-full object-cover"
                 />
@@ -150,9 +150,9 @@ export const TopHeader: React.FC<TopHeaderProps> = ({ onToggleMobileMenu }) => {
                 {/* Profile Card Header */}
                 <div className="px-5 py-3 border-b border-zinc-100 flex items-center gap-3.5">
                   <div className="relative w-12 h-12 rounded-2xl overflow-hidden border-2 border-[#FF7900] shadow-sm shrink-0">
-                    {currentUser.avatarUrl ? (
+                    {currentUser.avatar ? (
                       <img
-                        src={currentUser.avatarUrl}
+                        src={currentUser.avatar}
                         alt={currentUser.name}
                         className="w-full h-full object-cover"
                       />
